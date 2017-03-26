@@ -1,0 +1,38 @@
+#highlights in red areas flooded during 2016 flooding of Ohio River
+
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+
+img = plt.imread('flood2015.png')
+img2 = plt.imread('flood2016.png')
+plt.imshow(img)
+plt.show()
+height = img.shape[0]
+width = img.shape[1]
+newImage = np.zeros((height,width,3))
+
+for i in range(height):
+	print("processing row", i)
+	for j in range(width):
+            if img[i, j, 2] > img[i, j, 1] and img[i, j, 2] > img[i, j, 0]:
+                newImage[i,j,0] = 0
+                newImage[i,j,1] = 0
+                newImage[i,j,2] = img[i,j,2]
+            elif img2[i, j, 2] > img2[i, j, 1] and img2[i, j, 2] > img2[i, j, 0]:
+                newImage[i, j, 0] = .7
+                newImage[i, j, 1] = .1
+                newImage[i, j, 2] = .1
+            else:
+                newImage[i, j, 0] = img2[i, j, 0]
+                newImage[i, j, 1] = img2[i, j, 1]
+                newImage[i, j, 2] = img2[i, j, 2]
+
+plt.imshow(newImage)
+plt.show()
+plt.imsave('face2.png',newImage)
+
+
+print("Upper left has red:", img[0,0,0])
+print("Upper left has green:", img[0,0,1])
+print("Upper left has blue:",  img[0,0,2])

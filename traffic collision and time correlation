@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import csv
+from collections import Counter
+from stats import correlation
+
+minutes = (range(0,60))
+
+with open('nypd_coll_264.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    crash_string = [row['TIME'] for row in reader]  # collecting timestamps, populating list
+
+split_crash_str = [i.split(':', 2)[1] for i in crash_string]  # splits list, removing minutes from timestamps
+print(split_crash_str)
+crash_dict = Counter(split_crash_str)
+crash_dict.update({'1':0, '21':0, '23':0, '31':0})
+print(crash_dict)
+
+corr = correlation(crash_dict.values(), minutes)
+
+print("ρ(minutes, number of accidents): ", corr)
+
+#bar graph
+plt.bar(crash_dict.keys(), crash_dict.values(), width=1, color='pink')
+plt.title("Total Traffic Collisions Per Minute in New York City" + '\n' + "April 26 2016" + '\n' + "ρ(minutes,#accidents) = 0.11273492172676892")
+plt.xlabel("Minute (0-59)")
+plt.ylabel("Number of Collisions")
+plt.xticks(range(0, 60))
+ax = plt.axes()
+ax.xaxis.grid()
+ax.yaxis.grid()
+plt.xlim(0, 60)
+
+plt.show()

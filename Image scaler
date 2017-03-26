@@ -1,0 +1,22 @@
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+
+img = plt.imread('nyc_sat.png')
+plt.imshow(img)
+plt.show()
+height = img.shape[0]
+width = img.shape[1]
+print(height)
+print(width)
+newImage = np.zeros((height,width,3))
+
+for i in range(int(height/9)):
+	    for j in range(int(width/9)):
+                    newImage[i,j,0] = img[int(i*9),int(j*9),0]
+                    newImage[i,j,1] = img[int(i*9),int(j*9),1]
+                    newImage[i,j,2] = img[int(i*9),int(j*9),2]
+
+plt.imshow(newImage)
+plt.show()
+plt.imsave('nyc_sat2.png',newImage)

@@ -2,7 +2,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
-img = plt.imread('nyc_sat.png')
+img = plt.imread('nyc_sat.png') #name of image file you want to scale goes here
 plt.imshow(img)
 plt.show()
 height = img.shape[0]
@@ -11,6 +11,7 @@ print(height)
 print(width)
 newImage = np.zeros((height,width,3))
 
+#scales image to 1/9th its original size
 for i in range(int(height/9)):
 	    for j in range(int(width/9)):
                     newImage[i,j,0] = img[int(i*9),int(j*9),0]

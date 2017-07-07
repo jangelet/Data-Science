@@ -1,2 +1,4 @@
 # Data-Science Projects
-# These files largely create graphs using Matplotlib
+# Mostly Python scripts for scraping or manipulating information for statistical analysis
+Add topics
+
